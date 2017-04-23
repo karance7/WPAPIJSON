@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <title>WPAPIJSON</title>
+    <link rel="stylesheet" href="css/framework7.material.min.css">
+    <link rel="stylesheet" href="css/framework7.material.colors.min.css">
+</head>
+
+<body>
+    <div class="views">
+        <div class="view view-main">
+            <div class="navbar">
+                <div class="navbar-inner">
+                    <div class="center sliding">WPAPIJSON</div>
+                </div>
+            </div>
+            <div class="pages">
+                <div data-page="index" class="page navbar-fixed">
+                    <div class="page-content">
+                        <div class="content-block">
+                            <p>
+                                <ul id="listview"></ul>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="login-screen modal-in">
+        <div class="view">
+            <div class="page">
+                <div class="page-content login-screen-content">
+                    <div class="login-screen-title">WPAPIJSON</div>
+                    <form>
+                        <div class="list-block inputs-list">
+                            <ul>
+                                <li class="item-content">
+                                    <div class="item-inner">
+                                        <div class="item-title label">Website</div>
+                                        <div class="item-input">
+                                            <input type="text" name="Website" placeholder="Enter Your Website Name" />
+                                        </div>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="content-block"><a href="#" onclick="getUserinput()" class="button button-big item-link list-button">Enter</a></div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript" src="js/framework7.min.js"></script>
+    <script type="text/javascript" src="js/jquery.min.js"></script>
+    <script type="text/javascript">
+    	// Here you can initialize the app
+
+		var myApp = new Framework7();
+
+		// If your using custom DOM library, then save it to $$ variable
+
+		var $$ = Dom7;
+
+		// Add the view
+
+		var mainView = myApp.addView('.view-main', {
+
+		    // enable the dynamic navbar for this view:
+
+		    dynamicNavbar: true
+
+		});
+
+		// close login screen after login
+
+		$$('.login-screen .list-button').on('click', function() {
+
+		    var uname = $$('.login-screen input[name="Website"]').val();
+
+		    myApp.closeModal('.login-screen');
+
+		});
+
+		// Get user input and store in uname varible
+
+		function getUserinput(){
+
+		    var uname = $$('.login-screen input[name="Website"]').val();
+
+		};
+
+		// concat url using userinput
+
+		var url = "http://" + uname.getUserinput(); + "/?json=get_recent_posts";
+
+		// Get JSON array and store in varible 
+
+		function getJSON(url, function(result) {
+
+			$.each(result.posts, function(i, field) {
+
+			    var title = field.title;
+
+			    var content = field.content;
+
+			    // append in #listview id on frontend
+
+			    $("#listview").append('<div class="card ks-card-header-pic"><div style="background-image:url(' + URL + ')" valign="bottom" class="card-header color-white no-border">'+ title + '</div><div class="card-content"><div class="card-content-inner"><p class="color-gray">Posted on ' + date + '</p><p> ' + content + ' </p></div></div><div class="card-footer"><a href="#" class="link">Like</a><a href="#" class="link">Read more</a></div></div>');
+
+			});
+
+		});
+
+	</script>
+
+</body>
+
+</html>

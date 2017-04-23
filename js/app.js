@@ -41,10 +41,10 @@ $$('.login-screen .list-button').on('click', function() {
 	$.getJSON(url, function(result) {
 
 		$.each(result.posts, function(i, field) {
-
-		    var title = field.title;
-
-		    var content = field.content;
+			console.log(field);
+		    var title = field.title,
+		    	date = field.date,
+		    	content = field.content;
 
 		    // append in #listview id on frontend
 

@@ -4,7 +4,7 @@ var myApp = new Framework7();
 
 // If your using custom DOM library, then save it to $$ variable
 
-// var $$ = Dom7;
+var $$ = Dom7;
 
 // Add the view
 
@@ -18,7 +18,7 @@ var mainView = myApp.addView('.view-main', {
 
 // close login screen after login
 
-Dom7('.login-screen .list-button').on('click', function() {
+$$('.login-screen .list-button').on('click', function() {
 
     var uname = $$('.login-screen input[name="Website"]').val();
 
@@ -28,30 +28,29 @@ Dom7('.login-screen .list-button').on('click', function() {
 
 // Get user input and store in uname varible
 
-function getUserinput(){
+$$('.login-screen .list-button').on('click', function() {
 
-    var uname = Dom7('.login-screen input[name="Website"]').val();
+	// concat url using userinput
 
-};
+	var userinput = $$('.login-screen input[name="Website"]').val();
 
-// concat url using userinput
+	var url = "http://" + userinput + "/?json=get_recent_posts";
 
-var url = "http://" + uname.getUserinput(); + "/?json=get_recent_posts";
+	// Get JSON array and store in varible 
 
-// Get JSON array and store in varible 
+	$.getJSON(url, function(result) {
 
-function getJSON(url, function(result) {
+		$.each(result.posts, function(i, field) {
 
-	$.each(result.posts, function(i, field) {
+		    var title = field.title;
 
-	    var title = field.title;
+		    var content = field.content;
 
-	    var content = field.content;
+		    // append in #listview id on frontend
 
-	    // append in #listview id on frontend
+		    $("#listview").append('<div class="card ks-card-header-pic"><div style="background-image:url(' + URL + ')" valign="bottom" class="card-header color-white no-border">'+ title + '</div><div class="card-content"><div class="card-content-inner"><p class="color-gray">Posted on ' + date + '</p><p> ' + content + ' </p></div></div><div class="card-footer"><a href="#" class="link">Like</a><a href="#" class="link">Read more</a></div></div>');
 
-	    $("#listview").append('<div class="card ks-card-header-pic"><div style="background-image:url(' + URL + ')" valign="bottom" class="card-header color-white no-border">'+ title + '</div><div class="card-content"><div class="card-content-inner"><p class="color-gray">Posted on ' + date + '</p><p> ' + content + ' </p></div></div><div class="card-footer"><a href="#" class="link">Like</a><a href="#" class="link">Read more</a></div></div>');
+		});
 
-	});
-
+	}); 
 });

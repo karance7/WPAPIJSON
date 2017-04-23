@@ -46,6 +46,7 @@ $$('.login-screen .list-button').on('click', function() {
 		    	date = field.date,
 		    	content = field.content;
 
+
 		    // append in #listview id on frontend
 
 		    $("#listview").append('<div class="card ks-card-header-pic"><div style="background-image:url(' + URL + ')" valign="bottom" class="card-header color-white no-border">'+ title + '</div><div class="card-content"><div class="card-content-inner"><p class="color-gray">Posted on ' + date + '</p><p> ' + content + ' </p></div></div><div class="card-footer"><a href="#" class="link">Like</a><a href="#" class="link">Read more</a></div></div>');

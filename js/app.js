@@ -34,14 +34,13 @@ $$('.login-screen .list-button').on('click', function() {
 
 	var userinput = $$('.login-screen input[name="Website"]').val();
 
-	var url = "http://" + userinput + "/?json=get_recent_posts";
+	var url = "" + userinput + "/?json=get_recent_posts";
 
 	// Get JSON array and store in varible 
 
 	$.getJSON(url, function(result) {
 
 		$.each(result.posts, function(i, field) {
-			console.log(field);
 		    var title = field.title,
 		    	date = field.date,
 		    	content = field.content;
